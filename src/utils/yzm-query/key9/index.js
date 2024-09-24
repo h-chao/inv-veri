@@ -1,5 +1,7 @@
 import { encrypt, encryptComposite, encryptSimple } from "../../helper";
 
+// 生成验证码接口 key9
+
 export const generate_yzm_key9 = function (
   invoiceCode,
   invoiceNumber,
@@ -50,21 +52,16 @@ export const generate_yzm_key9 = function (
   var staticValue1 = "123456";
   var filteredEvenNumbers1 = combinations[0]
     .split("")
-    .filter((v) => parseInt(v) % 2 === 0);
+    .filter((v) => parseInt(v) % 2 === invoiceNumber % 2);
   staticValue1 = staticValue1 + filteredEvenNumbers1.join("");
   var staticValue2 = "654321";
   var filteredEvenNumbers2 = combinations[1]
     .split("")
-    .filter((v) => parseInt(v) % 2 === 0);
+    .filter((v) => parseInt(v) % 2 === invoiceNumber % 2);
   staticValue2 = staticValue2 + filteredEvenNumbers2.join("");
   var uniqueSortedArray = [...new Set(combinations[2].split(""))];
   var uniqueSortedString = uniqueSortedArray.sort().join("");
 
-  // const encryptedFinalValue1 = encrypt(
-  //   encrypt(uniqueSortedString)
-  //   + yy(uniqueSortedString)
-  //   + gen(xx(uniqueSortedString), base64Encode(xx(uniqueSortedString)))
-  // ).toUpperCase();
 
   var encryptedTimestamp =
     encrypt(timeStamp) +

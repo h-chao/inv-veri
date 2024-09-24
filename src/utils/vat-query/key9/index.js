@@ -1,5 +1,7 @@
 import { encrypt, encryptComposite, encryptSimple } from "../../helper";
 
+// 生成增值税发票查验接口 key9
+
 export const generate_vat_key9 = function (
   invoiceCode,
   invoiceNumber,
@@ -49,10 +51,10 @@ export const generate_vat_key9 = function (
   var secondaryValue = "654321";
   var secondaryFilteredVatComponent = vatComponents[1]
     .split("")
-    .filter((v) => v % 2 === 0);
+    .filter((v) => v % 2 === numberParity);
   secondaryValue += secondaryFilteredVatComponent.join("");
 
-  var uniqueVatComponent = [...new Set(vatComponents[2].split(""))].join("");
+  var uniqueVatComponent = [...new Set(vatComponents[2].split(""))].sort().join("");
 
   var finalEncryptedKey =
     encrypt(invoiceCode) +
